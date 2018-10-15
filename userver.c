@@ -16,21 +16,26 @@ void main()
 	socklen_t addrlen; 
 	int num; 
 	char buf[MAXDATASIZE]; 
+
 	if((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) 
 	{ 
 		perror("Creatingsocket failed."); exit(1); 
 	} 
+
 	bzero(&server,sizeof(server)); 
 	server.sin_family=AF_INET; 
 	server.sin_port=htons(PORT); 
 	server.sin_addr.s_addr= htonl(INADDR_ANY); 
+
 	if(bind(sockfd, (struct sockaddr *)&server, sizeof(server)) == -1) 
 	{ 
 		perror("Bind()error."); 
 		exit(1); 
 	}
+
 	addrlen=sizeof(client); 
 	int count = 0;
+
 	while(1) 
 	{ 
 		num =recvfrom(sockfd,buf,MAXDATASIZE,0,(struct sockaddr*)&client,&addrlen); 
@@ -46,5 +51,6 @@ void main()
 		if(!strcmp(buf,"bye")) 
 			break; 
 	} 
+	
 	close(sockfd); 
 }
