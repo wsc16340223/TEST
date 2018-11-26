@@ -3,26 +3,26 @@ contract Talk {
     string comment;
     address to;
     uint flag;
-    function Talk(){
+    constructor() public{
         flag = 0;
     }
-    function setComment(string co) public{
+    function setComment(string memory co) public{
         comment = co;
     }
-    function getComment() public returns (string) {
+    function getComment() public view returns (string memory) {
         return comment;
     }
     function setCmtTo(address ads) public {
         to = ads;
         flag = 1;
     }
-    function getTo() public returns (address){
+    function getTo() public view returns (address){
         return to;
     }
-    function getFlag() public returns (uint){
+    function getFlag() public view returns (uint){
         return flag;
     }
-    function getAddress() public returns (address) {
+    function getAddress() public view returns (address) {
         return msg.sender;
     }
 }
@@ -32,17 +32,17 @@ contract TalkUser {
     string password;
     Talk mySend;
     Talk myReply;
-    function TalkUser(string na, string pa){
+    constructor(string memory na, string memory pa) public {
         name = na;
         password = pa;
     }
-    function send(string comment) public {
+    function send(string memory comment) public {
         mySend = new Talk();
         mySend.setComment(comment);
         mySend.getComment();
         mySend.getAddress();
     }
-    function reply(string comment, address to) public {
+    function reply(string memory comment, address to) public {
         myReply = new Talk();
         myReply.setComment(comment);
         myReply.setCmtTo(to);
