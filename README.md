@@ -44,9 +44,7 @@ contract TalkUser {
     
     function getAddress() public view returns (address) {
         return msg.sender;
-    }
-    
-    
+    } 
 }
 
 
